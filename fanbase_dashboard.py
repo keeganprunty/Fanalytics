@@ -91,13 +91,13 @@ genotypes = {
                    "Kansas", "Kentucky", "Michigan State", "Nebraska", "North Carolina", 
                    "Purdue", "Rutgers", "Wisconsin"]
     },
-    "West Coast Selective Affluents": {
+    "Disengaged Fans": {
         "count": 2,
-        "description": "High earnings, declining attendance, and urban markets",
+        "description": "High earnings with declining attendance and low engagement",
         "color": "#f39c12",
         "schools": ["California", "UCLA"]
     },
-    "Urban Academic Elites": {
+    "Selective Affluents": {
         "count": 4,
         "description": "Highest earnings with recent attendance surge and selective engagement",
         "color": "#9b59b6",
@@ -155,6 +155,33 @@ if page == "Home":
                 st.session_state.selected_genotype = name
                 st.session_state.page = 'genotype_detail'
                 st.rerun()
+    
+    st.markdown("---")
+    
+    # Clustering methodology section
+    st.markdown("### How We Identified These Genotypes")
+    
+    st.markdown("""
+    We used **k-means clustering** on 8 metrics to identify 5 natural groupings of fanbases:
+    - Attendance patterns (5-year change, MBB attendance %)
+    - Social media reach (FB & BB Instagram followers)
+    - Financial support (donation revenue)
+    - Demographics (graduate earnings)
+    - Performance (win % since 2003, stadium capacity %)
+    """)
+    
+    # Display clustering visualization
+    try:
+        st.image("fanbase_cluster.png", use_column_width=True)
+        st.caption("Left: PCA visualization showing 5 distinct genotypes | Right: Silhouette analysis confirming k=5 optimal cluster separation")
+    except:
+        st.info("📊 Clustering visualizations will appear here after you upload clustering_visualization.png to GitHub")
+    
+    st.markdown("""
+    **Why k=5?** Silhouette analysis revealed that 5 clusters maximize separation between groups 
+    while maintaining cohesion within each genotype. The PCA visualization confirms distinct, 
+    non-overlapping fanbase archetypes.
+    """)
     
     st.markdown("---")
     
