@@ -172,7 +172,7 @@ if page == "Home":
     
     # Display clustering visualization
     try:
-        st.image("clustering_visualization.png", use_column_width=True)
+        st.image("fanbase_cluster.png", use_column_width=True)
         st.caption("Left: PCA visualization showing 5 distinct genotypes | Right: Silhouette analysis confirming k=5 optimal cluster separation")
     except:
         st.info("📊 Clustering visualizations will appear here after you upload clustering_visualization.png to GitHub")
