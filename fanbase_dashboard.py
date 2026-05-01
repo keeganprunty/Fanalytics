@@ -172,7 +172,7 @@ if page == "Home":
     
     # Display clustering visualization
     try:
-        st.image("fanbase_cluster.png", use_column_width=True)
+        st.image("clustering_visualization.png", use_column_width=True)
         st.caption("Left: PCA visualization showing 5 distinct genotypes | Right: Silhouette analysis confirming k=5 optimal cluster separation")
     except:
         st.info("📊 Clustering visualizations will appear here after you upload clustering_visualization.png to GitHub")
@@ -226,9 +226,155 @@ elif page == "Genotype Profiles":
         
         st.markdown("---")
         
-        # Placeholder for detailed profile
-        st.info("📊 Detailed demographic profiles coming soon...")
+        # DETAILED PROFILES
         
+        if selected == "Established Traditionalists":
+            st.markdown("### Fanbase Character")
+            st.markdown("""
+These are traditional college sports families who care deeply about BOTH football and basketball—multi-generational 
+supporters including parents who bring children to games, alumni who return for homecoming, and local community members 
+who've supported the program for decades. Alumni work in stable middle-class professions (education, healthcare, skilled 
+trades), stay regionally connected (60-70% in-state), and scatter across regional hubs rather than coastal metros. The 
+fanbase is rooted in tradition and school pride, not bandwagon championship-chasing. Think Nebraska grads in Omaha and 
+Lincoln, Kansas grads in Kansas City, Auburn grads across Alabama.
+            """)
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Alumni Base", "237k avg")
+                st.metric("Graduate Earnings", "$73k median")
+            with col2:
+                st.metric("FB Attendance", "94.8%")
+                st.metric("MBB Attendance", "96.6%")
+            with col3:
+                st.metric("Social Media", "509k total")
+                st.metric("Donations", "$31.7M avg")
+            
+            st.markdown("### Key Characteristics")
+            st.markdown("- **UNCONDITIONAL LOYALTY**: High attendance despite moderate winning")
+            st.markdown("- **MULTI-SPORT PASSIONATE**: Strong basketball culture alongside football")
+            st.markdown("- **Economic class**: Middle to upper-middle ($73k median)")
+            st.markdown("- **Geographic pattern**: Regional concentration (60-70% in-state)")
+            st.markdown("- **Fanbase composition**: Alumni 40%, Local 30%, Regional 30%")
+        
+        elif selected == "National Brand Fanatics":
+            st.markdown("### Fanbase Character")
+            st.markdown("""
+These fanbases combine wealthy, passionate alumni (higher-earning professions in business, finance, healthcare leadership) 
+with massive numbers of national "Subway Alumni"—fans who never attended but adopted the team due to decades of televised 
+success. Alumni scatter everywhere—significant populations in every major U.S. metro from New York to Los Angeles—but the 
+national Subway Alumni fanbase extends reach even further (you'll find Alabama fans in Seattle who've never been to Tuscaloosa, 
+Ohio State fans in Miami who never attended OSU). The fanbase expects championships, not just competitive seasons, and has 
+the donation capacity to fund elite programs. This is truly national brand reach.
+            """)
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Alumni Base", "310k avg")
+                st.metric("Graduate Earnings", "$75k median")
+            with col2:
+                st.metric("FB Attendance", "101.1%")
+                st.metric("Win % (2003)", "71.8%")
+            with col3:
+                st.metric("Social Media", "1,159k total")
+                st.metric("Donations", "$68.6M avg")
+            
+            st.markdown("### Key Characteristics")
+            st.markdown("- **CHAMPIONSHIP EXPECTATIONS**: Elite performance meets elite support")
+            st.markdown("- **NATIONAL BRAND**: Massive reach beyond alumni (Subway Alumni effect)")
+            st.markdown("- **Economic class**: Middle to upper-middle ($75k median)")
+            st.markdown("- **Geographic pattern**: National scatter (40-50% in-state)")
+            st.markdown("- **Fanbase composition**: Alumni 25%, Local 35%, National 40%")
+        
+        elif selected == "Regional Community Loyalists":
+            st.markdown("### Fanbase Character")
+            st.markdown("""
+This fanbase is defined by LOCAL COMMUNITY SUPPORT beyond just alumni—college towns where the university IS the town's identity. 
+Local business owners, factory workers, teachers, healthcare professionals, and families who never attended the school treat 
+game day as the primary social and cultural event. Alumni work in practical middle-class fields (engineering, education, 
+agriculture, skilled trades), stay close to home (70-80% in-state, clustering in state capitals and 1-2 regional hubs), and 
+maintain deep ties to the university rather than scattering to coastal cities. Loyalty is unconditional—attendance stays 
+strong regardless of record because this is about COMMUNITY IDENTITY, not performance.
+            """)
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Alumni Base", "241k avg")
+                st.metric("Graduate Earnings", "$70k median")
+            with col2:
+                st.metric("FB Attendance", "96.9%")
+                st.metric("MBB Attendance", "66.3%")
+            with col3:
+                st.metric("Social Media", "379k total")
+                st.metric("Donations", "$30.9M avg")
+            
+            st.markdown("### Key Characteristics")
+            st.markdown("- **UNCONDITIONAL LOYALTY**: High attendance despite moderate winning")
+            st.markdown("- **COMMUNITY IDENTITY**: Game day is the region's primary cultural event")
+            st.markdown("- **Economic class**: Working to middle ($70k median)")
+            st.markdown("- **Geographic pattern**: Regional concentration (70-80% in-state)")
+            st.markdown("- **Fanbase composition**: Alumni 35%, Local 40%, Regional 25%")
+        
+        elif selected == "Disengaged Fans":
+            st.markdown("### Fanbase Character")
+            st.markdown("""
+Highly educated, affluent alumni (median earnings $87k+, highest economic class) working in tech, entertainment, finance, 
+and professional services, concentrated in West Coast metros (LA, San Francisco Bay, San Diego, Seattle) with scatter to 
+New York and Chicago. They're selective about engagement—attending when convenient or when the team performs well, but not 
+making football a central identity. The surrounding urban environment offers competing entertainment (pro sports, concerts, 
+beaches), so college football doesn't dominate cultural attention like it does in college towns or the South. This fanbase 
+values academic prestige over athletic dominance and sees sports as entertainment, not community ritual.
+            """)
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Alumni Base", "533k avg")
+                st.metric("Graduate Earnings", "$87k median")
+            with col2:
+                st.metric("FB Attendance", "48.8%")
+                st.metric("5-Year Change", "-14.2%")
+            with col3:
+                st.metric("Social Media", "311k total")
+                st.metric("Donations", "$15.4M avg")
+            
+            st.markdown("### Key Characteristics")
+            st.markdown("- **SELECTIVE ENGAGEMENT**: Attend when convenient/successful")
+            st.markdown("- **DECLINING ATTENDANCE**: -14% over 5 years")
+            st.markdown("- **Economic class**: Upper-middle to affluent ($87k median - highest)")
+            st.markdown("- **Geographic pattern**: National scatter (West Coast + major metros)")
+            st.markdown("- **Fanbase composition**: Alumni 50%, Local 20%, Scattered 30%")
+        
+        elif selected == "Selective Affluents":
+            st.markdown("### Fanbase Character")
+            st.markdown("""
+Academically-focused alumni (median earnings $94k—highest of all genotypes) working in STEM, finance, consulting, and 
+professional services, scattering to major professional hubs (DC, New York, Chicago, San Francisco, Atlanta) for career 
+opportunities. Recent program improvement has driven an attendance surge (+21% over 5 years), but this fanbase has 
+historically been smaller and less passionate than peers—urban location means competing entertainment reduces football's 
+cultural centrality. These are educated professionals who attend when the team is winning or for social/networking purposes, 
+exhibiting selective engagement rather than unconditional loyalty. Geographic dispersal reflects professional mobility 
+rather than regional loyalty.
+            """)
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Alumni Base", "287k avg")
+                st.metric("Graduate Earnings", "$94k median")
+            with col2:
+                st.metric("FB Attendance", "86.9%")
+                st.metric("5-Year Change", "+20.7%")
+            with col3:
+                st.metric("Social Media", "237k total")
+                st.metric("Donations", "$30.3M avg")
+            
+            st.markdown("### Key Characteristics")
+            st.markdown("- **PERFORMANCE-SENSITIVE**: Attendance tracks recent success closely")
+            st.markdown("- **RECENT SURGE**: +21% attendance growth over 5 years")
+            st.markdown("- **Economic class**: Upper-middle to affluent ($94k median - HIGHEST)")
+            st.markdown("- **Geographic pattern**: National scatter (professional hubs)")
+            st.markdown("- **Fanbase composition**: Alumni 50%, Local 20%, Scattered 30%")
+        
+        st.markdown("---")
         st.markdown("### Schools in this Genotype")
         
         # Display schools in columns
