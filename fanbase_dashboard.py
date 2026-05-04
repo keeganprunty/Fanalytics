@@ -2,6 +2,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+@st.cache_data
+def load_data():
+    return pd.read_csv("power4_attributes_fin.csv")
+
+df = load_data()
+
 # Page configuration
 st.set_page_config(
     page_title="Fanbase Genotyping System",
@@ -415,7 +421,27 @@ elif page == "School Detail":
                 
                 st.markdown("---")
                 st.markdown("### Additional School Metrics")
-                st.info("📊 Coming soon...")
+
+                school_row = df[df["School"] == selected_school]
+
+                if not school_row.empty:
+                    row = school_row.iloc[0]
+
+                    col1, col2 = st.columns(2)
+
+                with col1:
+                    st.metric("5-Year Attendance Change", f"{row['5_Year_Pct_Change']}%")
+                    st.metric("FB Instagram (K)", row["Instagram_Followers_FB (Thousands)"])
+                    st.metric("BB Instagram (K)", row["Instagram_Followers_BB (Thousands)"])
+                    st.metric("Donations ($M)", row["Donation_Revenue (Millions)"])
+
+                with col2:
+                    st.metric("Win % Since 2003", f"{row['Win_Pct_Since_2003']}%")
+                    st.metric("Graduate Earnings ($K)", row["Graduate_Earnings(Thousands)"])
+                    st.metric("MBB Attendance %", f"{row['Attendence_Pct_MBB']}%")
+                    st.metric("Stadium Capacity %", f"{row['Football_Stadium_Capacity(22-25)']}%")
+                else:
+                    st.error("School not found in dataset")
                 
                 break
    
