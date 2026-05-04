@@ -429,17 +429,17 @@ elif page == "School Detail":
 
                     col1, col2 = st.columns(2)
 
-                with col1:
-                    st.metric("5-Year Attendance Change", f"{row['5_Year_Pct_Change']}%")
-                    st.metric("FB Instagram (K)", row["Instagram_Followers_FB (Thousands)"])
-                    st.metric("BB Instagram (K)", row["Instagram_Followers_BB (Thousands)"])
-                    st.metric("Donations ($M)", row["Donation_Revenue (Millions)"])
+                    with col1:
+                        st.metric("5-Year Attendance Change", f"{row['5_Year_Pct_Change']}%")
+                        st.metric("FB Instagram (K)", row["Instagram_Followers_FB (Thousands)"])
+                        st.metric("BB Instagram (K)", row["Instagram_Followers_BB (Thousands)"])
+                        st.metric("Donations ($M)", row["Donation_Revenue (Millions)"])
 
-                with col2:
-                    st.metric("Win % Since 2003", f"{row['Win_Pct_Since_2003']}%")
-                    st.metric("Graduate Earnings ($K)", row["Graduate_Earnings(Thousands)"])
-                    st.metric("MBB Attendance %", f"{row['Attendence_Pct_MBB']}%")
-                    st.metric("Stadium Capacity %", f"{row['Football_Stadium_Capacity(22-25)']}%")
+                    with col2:
+                        st.metric("Win % Since 2003", f"{row['Win_Pct_Since_2003']}%")
+                        st.metric("Graduate Earnings ($K)", row["Graduate_Earnings(Thousands)"])
+                        st.metric("MBB Attendance %", f"{row['Attendence_Pct_MBB']}%")
+                        st.metric("Stadium Capacity %", f"{row['Football_Stadium_Capacity(22-25)']}%")
                 else:
                     st.error("School not found in dataset")
                 
