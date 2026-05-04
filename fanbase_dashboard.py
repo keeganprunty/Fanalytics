@@ -151,10 +151,7 @@ if page == "Home":
             """, unsafe_allow_html=True)
         
         with col2:
-            if st.button("View →", key=name, use_container_width=True):
-                st.session_state.selected_genotype = name
-                st.session_state.page = 'genotype_detail'
-                st.rerun()
+            st.markdown(f"<a href='#' style='text-decoration:none; color: {data['color']};'>→ Use sidebar</a>", unsafe_allow_html=True)
     
     st.markdown("---")
     
