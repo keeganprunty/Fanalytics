@@ -27,9 +27,6 @@ numeric_cols = [
 kmeans = KMeans(n_clusters=5, random_state=42, n_init=10)
 df["Cluster"] = kmeans.fit_predict(df[numeric_cols])
 
-# Map clusters to genotypes using majority vote
-cluster_to_genotype = {}
-
 for cluster_id in df["Cluster"].unique():
     schools_in_cluster = df[df["Cluster"] == cluster_id]["School"]
 
@@ -37,6 +34,10 @@ for cluster_id in df["Cluster"].unique():
 
     if not mapped.dropna().empty:
         cluster_to_genotype[cluster_id] = mapped.mode()[0]
+
+# Map clusters to genotypes using majority vote
+cluster_to_genotype = {}
+
 
 # Page configuration
 st.set_page_config(
