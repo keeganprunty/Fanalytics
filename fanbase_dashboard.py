@@ -382,7 +382,6 @@ rather than regional loyalty.
         for i, school in enumerate(sorted(data['schools'])):
             with cols[i % 3]:
                 st.markdown(f"• {school}")
-
 elif page == "School Detail":
     st.markdown('<div class="main-header">School Detail</div>', unsafe_allow_html=True)
     st.markdown("---")
@@ -404,25 +403,25 @@ elif page == "School Detail":
                 st.markdown(f"**Genotype:** {genotype_name}")
                 st.markdown("---")
                 
-                # ADD ALUMNI MAP HERE
+                # ALUMNI MAP
                 st.markdown("### Where Alumni Live")
-                st.markdown("Interactive map showing alumni concentration by city. Use the dropdown in the map to view different schools.")
+                st.markdown("Interactive map showing alumni concentration by city. Darker circles = higher concentration. Use the dropdown in the map to view different schools.")
                 
                 try:
                     import streamlit.components.v1 as components
-                    with open("alumni_map.html", "r", encoding="utf-8") as f:
+                    with open("school_city_radius_map.html", "r", encoding="utf-8") as f:
                         html_content = f.read()
                     
-                    # Embed the HTML map
                     components.html(html_content, height=600, scrolling=True)
                 except:
-                    st.info("📍 Interactive alumni map will appear here after uploading alumni_map.html to GitHub")
+                    st.info("📍 Interactive alumni map will appear here after uploading school_city_radius_map.html to GitHub")
                 
                 st.markdown("---")
                 st.markdown("### Additional School Metrics")
                 st.info("📊 Coming soon...")
                 
                 break
+   
 
 elif page == "Compare Schools":
     st.markdown('<div class="main-header">Compare Schools</div>', unsafe_allow_html=True)
