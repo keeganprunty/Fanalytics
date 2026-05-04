@@ -27,6 +27,17 @@ numeric_cols = [
 kmeans = KMeans(n_clusters=5, random_state=42, n_init=10)
 df["Cluster"] = kmeans.fit_predict(df[numeric_cols])
 
+# Map clusters to genotypes using majority vote
+cluster_to_genotype = {}
+
+for cluster_id in df["Cluster"].unique():
+    schools_in_cluster = df[df["Cluster"] == cluster_id]["School"]
+
+    mapped = schools_in_cluster.map(genotype_lookup)
+
+    if not mapped.dropna().empty:
+        cluster_to_genotype[cluster_id] = mapped.mode()[0]
+
 # Page configuration
 st.set_page_config(
     page_title="Fanbase Genotyping System",
@@ -130,7 +141,11 @@ genotypes = {
     }
 }
 
+# Build lookup: school -> genotype
 genotype_lookup = {}
+for genotype_name, data in genotypes.items():
+    for school in data["schools"]:
+        genotype_lookup[school] = genotype_name
 
 cluster_to_genotype = {}
 
@@ -600,25 +615,25 @@ elif page == "Classify New School":
     
     if st.button("Classify School", type="primary"):
         st.markdown("---")
-# Build input vector
-new_data = pd.DataFrame([[
-    change_5yr,
-    fb_insta,
-    bb_insta,
-    donations,
-    win_pct,
-    earnings,
-    mbb_att,
-    capacity
-]], columns=numeric_cols)
+    # Build input vector
+    new_data = pd.DataFrame([[
+        change_5yr,
+        fb_insta,
+        bb_insta,
+        donations,
+        win_pct,
+        earnings,
+        mbb_att,
+        capacity
+    ]], columns=numeric_cols)
 
-# Predict cluster
-cluster = kmeans.predict(new_data)[0]
+    # Predict cluster
+    cluster = kmeans.predict(new_data)[0]
 
-# Map to genotype
-predicted_genotype = cluster_to_genotype.get(cluster, "Unknown")
+    # Map to genotype
+    predicted_genotype = cluster_to_genotype.get(cluster, "Unknown")
 
-st.success(f"🏫 **{school_name}** is classified as: **{predicted_genotype}**")
+    st.success(f"🏫 **{school_name}** is classified as: **{predicted_genotype}**")
 
 # Footer
 st.markdown("---")
