@@ -404,7 +404,24 @@ elif page == "School Detail":
                 st.markdown(f"**Genotype:** {genotype_name}")
                 st.markdown("---")
                 
-                st.info("📊 School-specific metrics coming soon...")
+                # ADD ALUMNI MAP HERE
+                st.markdown("### Where Alumni Live")
+                st.markdown("Interactive map showing alumni concentration by city. Use the dropdown in the map to view different schools.")
+                
+                try:
+                    import streamlit.components.v1 as components
+                    with open("alumni_map.html", "r", encoding="utf-8") as f:
+                        html_content = f.read()
+                    
+                    # Embed the HTML map
+                    components.html(html_content, height=600, scrolling=True)
+                except:
+                    st.info("📍 Interactive alumni map will appear here after uploading alumni_map.html to GitHub")
+                
+                st.markdown("---")
+                st.markdown("### Additional School Metrics")
+                st.info("📊 Coming soon...")
+                
                 break
 
 elif page == "Compare Schools":
