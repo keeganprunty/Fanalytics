@@ -9,6 +9,9 @@ def load_data():
 
 df = load_data()
 
+bad_schools = ["Miami", "Pitt", "Stanford", "Syracuse", "USC"]
+df = df[~df["School"].isin(bad_schools)]
+
 numeric_cols = [
     "5_Year_Pct_Change",
     "Instagram_Followers_FB (Thousands)",
