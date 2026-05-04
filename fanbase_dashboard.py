@@ -455,16 +455,34 @@ elif page == "School Detail":
 elif page == "Compare Schools":
     st.markdown('<div class="main-header">Compare Schools</div>', unsafe_allow_html=True)
     st.markdown("---")
+
+    # Build school list
+    all_schools = []
+    for data in genotypes.values():
+        all_schools.extend(data['schools'])
+
+    # SELECTORS (you were missing this)
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        school1 = st.selectbox("School 1", [""] + sorted(all_schools), key="compare1")
+
+    with col2:
+        school2 = st.selectbox("School 2", [""] + sorted(all_schools), key="compare2")
+
+    with col3:
+        school3 = st.selectbox("School 3 (optional)", [""] + sorted(all_schools), key="compare3")
+
     selected = [s for s in [school1, school2, school3] if s]
 
     compare_df = df[df["School"].isin(selected)].copy()
 
     if not compare_df.empty:
 
-    # Add genotype column
+        # Add genotype
         compare_df["Genotype"] = compare_df["School"].map(genotype_lookup)
 
-    # Select key columns
+        # Columns to show
         display_cols = [
             "School",
             "Genotype",
@@ -474,21 +492,22 @@ elif page == "Compare Schools":
             "Donation_Revenue (Millions)",
             "Win_Pct_Since_2003",
             "Graduate_Earnings(Thousands)"
-    ]
+        ]
 
         st.subheader("School Comparison Overview")
         st.dataframe(compare_df[display_cols].set_index("School"))
 
         st.subheader("Quick Profile")
 
-    for _, row in compare_df.iterrows():
-        st.markdown(f"""
-        ### {row['School']}
-        - **Genotype:** {row['Genotype']}
-        - **Primary Alumni City:** {row['Majority_city']}
-        - **Win %:** {row['Win_Pct_Since_2003']}%
-        - **Earnings:** ${row['Graduate_Earnings(Thousands)']}K
-        """)
+        # ✅ NOW INDENTED CORRECTLY
+        for _, row in compare_df.iterrows():
+            st.markdown(f"""
+            ### {row['School']}
+            - **Genotype:** {row['Genotype']}
+            - **Primary Alumni City:** {row['Majority_city']}
+            - **Win %:** {row['Win_Pct_Since_2003']}%
+            - **Earnings:** ${row['Graduate_Earnings(Thousands)']}K
+            """)
 
 elif page == "Classify New School":
     st.markdown('<div class="main-header">Classify a New School</div>', unsafe_allow_html=True)
