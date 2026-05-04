@@ -4,7 +4,7 @@ import numpy as np
 
 @st.cache_data
 def load_data():
-    return pd.read_csv("power4_attributes_fin.csv")
+    return pd.read_csv("power4_attributes(Sheet1).csv")
 
 df = load_data()
 
