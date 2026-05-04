@@ -468,6 +468,7 @@ elif page == "School Detail":
                         st.metric("FB Instagram (K)", row["Instagram_Followers_FB (Thousands)"])
                         st.metric("BB Instagram (K)", row["Instagram_Followers_BB (Thousands)"])
                         st.metric("Donations ($M)", row["Donation_Revenue (Millions)"])
+                        st.metric("Living Alumni (K)", row["Alumni_amount"])
 
                     with col2:
                         st.metric("Win % Since 2003", f"{row['Win_Pct_Since_2003']}%")
