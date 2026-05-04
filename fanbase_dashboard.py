@@ -479,6 +479,17 @@ elif page == "Compare Schools":
         st.subheader("School Comparison Overview")
         st.dataframe(compare_df[display_cols].set_index("School"))
 
+        st.subheader("Quick Profile")
+
+    for _, row in compare_df.iterrows():
+        st.markdown(f"""
+        ### {row['School']}
+        - **Genotype:** {row['Genotype']}
+        - **Primary Alumni City:** {row['Majority_city']}
+        - **Win %:** {row['Win_Pct_Since_2003']}%
+        - **Earnings:** ${row['Graduate_Earnings(Thousands)']}K
+        """)
+
 elif page == "Classify New School":
     st.markdown('<div class="main-header">Classify a New School</div>', unsafe_allow_html=True)
     st.markdown("---")
