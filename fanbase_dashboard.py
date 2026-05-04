@@ -461,7 +461,7 @@ elif page == "Compare Schools":
     for data in genotypes.values():
         all_schools.extend(data['schools'])
 
-    # SELECTORS (you were missing this)
+    # Select schools
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -482,7 +482,9 @@ elif page == "Compare Schools":
         # Add genotype
         compare_df["Genotype"] = compare_df["School"].map(genotype_lookup)
 
-        # Columns to show
+        # =========================
+        # TABLE (clean overview)
+        # =========================
         display_cols = [
             "School",
             "Genotype",
@@ -497,17 +499,53 @@ elif page == "Compare Schools":
         st.subheader("School Comparison Overview")
         st.dataframe(compare_df[display_cols].set_index("School"))
 
-        st.subheader("Quick Profile")
+        # =========================
+        # CLEAN PROFILE CARDS
+        # =========================
+        st.subheader("School Profiles")
 
-        # ✅ NOW INDENTED CORRECTLY
         for _, row in compare_df.iterrows():
             st.markdown(f"""
-            ### {row['School']}
-            - **Genotype:** {row['Genotype']}
-            - **Primary Alumni City:** {row['Majority_city']}
-            - **Win %:** {row['Win_Pct_Since_2003']}%
-            - **Earnings:** ${row['Graduate_Earnings(Thousands)']}K
-            """)
+            <div style="padding:15px; border-radius:10px; border:1px solid #ddd; margin-bottom:10px;">
+                <h4 style="margin-bottom:5px;">{row['School']}</h4>
+                <b>Genotype:</b> {row['Genotype']}<br>
+                <b>Primary Alumni City:</b> {row['Majority_city']}
+            </div>
+            """, unsafe_allow_html=True)
+
+        # =========================
+        # BAR CHARTS (ALL 8 METRICS)
+        # =========================
+        st.subheader("Attribute Comparison")
+
+        numeric_cols = [
+            "5_Year_Pct_Change",
+            "Instagram_Followers_FB (Thousands)",
+            "Instagram_Followers_BB (Thousands)",
+            "Donation_Revenue (Millions)",
+            "Win_Pct_Since_2003",
+            "Graduate_Earnings(Thousands)",
+            "Attendence_Pct_MBB",
+            "Football_Stadium_Capacity(22-25)"
+        ]
+
+        pretty_names = {
+            "5_Year_Pct_Change": "5-Year Change (%)",
+            "Instagram_Followers_FB (Thousands)": "FB Instagram (K)",
+            "Instagram_Followers_BB (Thousands)": "BB Instagram (K)",
+            "Donation_Revenue (Millions)": "Donations ($M)",
+            "Win_Pct_Since_2003": "Win %",
+            "Graduate_Earnings(Thousands)": "Earnings ($K)",
+            "Attendence_Pct_MBB": "MBB Attendance %",
+            "Football_Stadium_Capacity(22-25)": "Stadium Capacity %"
+        }
+
+        for col in numeric_cols:
+            chart_df = compare_df.set_index("School")[[col]]
+            chart_df = chart_df.rename(columns={col: pretty_names[col]})
+
+            st.markdown(f"#### {pretty_names[col]}")
+            st.bar_chart(chart_df)
 
 elif page == "Classify New School":
     st.markdown('<div class="main-header">Classify a New School</div>', unsafe_allow_html=True)
