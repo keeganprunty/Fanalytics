@@ -600,8 +600,25 @@ elif page == "Classify New School":
     
     if st.button("Classify School", type="primary"):
         st.markdown("---")
-        st.info("🔍 Classification tool coming soon...")
-        st.markdown(f"**{school_name}** would be classified based on nearest-centroid approach")
+# Build input vector
+new_data = pd.DataFrame([[
+    change_5yr,
+    fb_insta,
+    bb_insta,
+    donations,
+    win_pct,
+    earnings,
+    mbb_att,
+    capacity
+]], columns=numeric_cols)
+
+# Predict cluster
+cluster = kmeans.predict(new_data)[0]
+
+# Map to genotype
+predicted_genotype = cluster_to_genotype.get(cluster, "Unknown")
+
+st.success(f"🏫 **{school_name}** is classified as: **{predicted_genotype}**")
 
 # Footer
 st.markdown("---")
