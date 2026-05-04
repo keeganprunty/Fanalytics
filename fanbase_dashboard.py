@@ -1,12 +1,28 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from sklearn.cluster import KMeans
 
 @st.cache_data
 def load_data():
     return pd.read_csv("power4_attributes(Sheet1).csv")
 
 df = load_data()
+
+numeric_cols = [
+    "5_Year_Pct_Change",
+    "Instagram_Followers_FB (Thousands)",
+    "Instagram_Followers_BB (Thousands)",
+    "Donation_Revenue (Millions)",
+    "Win_Pct_Since_2003",
+    "Graduate_Earnings(Thousands)",
+    "Attendence_Pct_MBB",
+    "Football_Stadium_Capacity(22-25)"
+]
+
+# Run KMeans (k=5 like your project)
+kmeans = KMeans(n_clusters=5, random_state=42, n_init=10)
+df["Cluster"] = kmeans.fit_predict(df[numeric_cols])
 
 # Page configuration
 st.set_page_config(
@@ -112,6 +128,13 @@ genotypes = {
 }
 
 genotype_lookup = {}
+
+cluster_to_genotype = {}
+
+for school, genotype in genotype_lookup.items():
+    cluster_val = df[df["School"] == school]["Cluster"].values
+    if len(cluster_val) > 0:
+        cluster_to_genotype[cluster_val[0]] = genotype
 
 for genotype_name, data in genotypes.items():
     for school in data["schools"]:
