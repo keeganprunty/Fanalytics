@@ -212,12 +212,19 @@ if page == "Home":
     """)
     
     # Display clustering visualization
-    import matplotlib.pyplot as plt
-    from sklearn.decomposition import PCA
+# Display clustering visualization
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 
-    # Load your data
-    X = df[...].values
-    X_scaled_pca = scaler.fit_transform(X)  # Standardize for PCA too
+    # Use the df that's already loaded at the top
+    X = df[numeric_cols].values
+
+    # Standardize the data (CRITICAL!)
+    scaler_pca = StandardScaler()
+    X_scaled_pca = scaler_pca.fit_transform(X)
+
+    # PCA on scaled data
     pca = PCA(n_components=2)
     X_pca = pca.fit_transform(X_scaled_pca)
 
