@@ -151,10 +151,18 @@ if 'page' not in st.session_state:
 
 # Sidebar navigation
 st.sidebar.title("🏈 Navigation")
+
+# Check if we need to navigate to a specific page
+if 'nav_to_page' in st.session_state:
+    page_index = st.session_state.nav_to_page
+    del st.session_state.nav_to_page
+else:
+    page_index = 0
+
 page = st.sidebar.radio(
     "Select Page",
     ["Home", "Genotype Profiles", "School Detail", "Compare Schools", "Classify New School"],
-    index=0
+    index=page_index
 )
 
 # Main content
@@ -293,7 +301,8 @@ if page == "Home":
                 col1, col2 = st.columns([1, 4])
                 with col1:
                     if st.button("View Details", type="primary"):
-                        # Switch to Genotype Profiles page
+                        # Set BOTH the page AND the genotype
+                        st.session_state.nav_to_page = 1  # Index 1 = "Genotype Profiles"
                         st.session_state.nav_to_genotype = genotype_name
                         st.rerun()
                 with col2:
