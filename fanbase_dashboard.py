@@ -165,6 +165,17 @@ page = st.sidebar.radio(
     index=page_index
 )
 
+# Scroll to top on page change
+import streamlit.components.v1 as components
+components.html(
+    """
+    <script>
+        window.parent.document.querySelector('section.main').scrollTo(0, 0);
+    </script>
+    """,
+    height=0,
+)
+
 # Main content
 if page == "Home":
     # Header
