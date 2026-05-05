@@ -212,11 +212,7 @@ if page == "Home":
     from sklearn.decomposition import PCA
 
     # Load your data
-    df = pd.read_csv("power4_attributes(Sheet1).csv")
-    X = df[['5_Year_Pct_Change', 'Instagram_Followers_FB (Thousands)', 
-            'Instagram_Followers_BB (Thousands)', 'Donation_Revenue (Millions)',
-            'Win_Pct_Since_2003', 'Graduate_Earnings(Thousands)',
-            'Attendence_Pct_MBB', 'Attendance_Pct_FB']].values
+    X = df[numeric_cols].values
 
     # PCA
     pca = PCA(n_components=2)
