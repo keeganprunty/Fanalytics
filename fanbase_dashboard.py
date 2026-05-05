@@ -287,15 +287,36 @@ if page == "Home":
         for genotype_name, data in genotypes.items():
             if selected_school in data['schools']:
                 st.success(f"**{selected_school}** belongs to: **{genotype_name}**")
-                if st.button("View Genotype Profile"):
-                    st.session_state.selected_genotype = genotype_name
-                    st.session_state.page = 'genotype_detail'
-                    st.rerun()
+                
+                # Create a direct link
+                st.markdown("---")
+                col1, col2 = st.columns([1, 4])
+                with col1:
+                    if st.button("View Details", type="primary"):
+                        # Switch to Genotype Profiles page
+                        st.session_state.nav_to_genotype = genotype_name
+                        st.rerun()
+                with col2:
+                    st.markdown("*Click to see full genotype profile and schools*")
                 break
-
 elif page == "Genotype Profiles":
     st.markdown('<div class="main-header">Genotype Profiles</div>', unsafe_allow_html=True)
     st.markdown("---")
+    
+    # Check if we navigated here from school lookup button
+    if 'nav_to_genotype' in st.session_state:
+        default_genotype = st.session_state.nav_to_genotype
+        default_index = list(genotypes.keys()).index(default_genotype)
+        del st.session_state.nav_to_genotype  # Clear the navigation flag
+    else:
+        default_index = 0
+    
+    # Genotype selector (pre-selects if coming from button)
+    selected = st.selectbox(
+        "Select a genotype to view detailed profile",
+        list(genotypes.keys()),
+        index=default_index
+    )
     
     # Genotype selector
     selected = st.selectbox(
