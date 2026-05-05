@@ -212,10 +212,9 @@ if page == "Home":
     """)
     
     # Display clustering visualization
-# Display clustering visualization
-import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
+    import matplotlib.pyplot as plt
+    from sklearn.decomposition import PCA
+    from sklearn.preprocessing import StandardScaler
 
     # Use the df that's already loaded at the top
     X = df[numeric_cols].values
