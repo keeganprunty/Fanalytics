@@ -203,7 +203,10 @@ if page == "Home":
             """, unsafe_allow_html=True)
         
         with col2:
-            st.markdown(f"<a href='#' style='text-decoration:none; color: {data['color']};'>→ Use sidebar</a>", unsafe_allow_html=True)
+            if st.button("View →", key=f"btn_{name}", use_container_width=True):
+                st.session_state.nav_to_page = 1  # Genotype Profiles page
+                st.session_state.nav_to_genotype = name
+                st.rerun()
     
     st.markdown("---")
     
