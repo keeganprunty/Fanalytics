@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
 
 @st.cache_data
 def load_data():
@@ -69,9 +70,12 @@ numeric_cols = [
     "Football_Stadium_Capacity(22-25)"
 ]
 
-# Run KMeans
+# WITH THIS:
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(df[numeric_cols])
+
 kmeans = KMeans(n_clusters=5, random_state=42, n_init=10)
-df["Cluster"] = kmeans.fit_predict(df[numeric_cols])
+df["Cluster"] = kmeans.fit_predict(X_scaled)
 
 # Map clusters to genotypes using majority vote
 cluster_to_genotype = {}
