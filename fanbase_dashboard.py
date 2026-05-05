@@ -318,12 +318,6 @@ elif page == "Genotype Profiles":
         index=default_index
     )
     
-    # Genotype selector
-    selected = st.selectbox(
-        "Select a genotype to view detailed profile",
-        list(genotypes.keys())
-    )
-    
     if selected:
         data = genotypes[selected]
         
