@@ -214,8 +214,7 @@ if page == "Home":
     # Display clustering visualization
     import matplotlib.pyplot as plt
     from sklearn.decomposition import PCA
-    from sklearn.preprocessing import StandardScaler
-
+    
     # Use the df that's already loaded at the top
     X = df[numeric_cols].values
 
@@ -227,14 +226,40 @@ if page == "Home":
     pca = PCA(n_components=2)
     X_pca = pca.fit_transform(X_scaled_pca)
 
-    # Plot
-    fig, ax = plt.subplots(figsize=(10, 6))
-    scatter = ax.scatter(X_pca[:, 0], X_pca[:, 1], c=df['Cluster'], cmap='viridis', s=100)
-    ax.set_xlabel('Principal Component 1')
-    ax.set_ylabel('Principal Component 2')
-    ax.set_title('K-Means Clustering (k=5) - PCA Visualization')
-    plt.colorbar(scatter, label='Cluster')
-
+    # Plot with school labels
+    fig, ax = plt.subplots(figsize=(14, 10))
+    
+    # Define colors for each cluster
+    colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6']
+    
+    # Plot each cluster with different color
+    for cluster_id in df['Cluster'].unique():
+        cluster_mask = df['Cluster'] == cluster_id
+        cluster_points = X_pca[cluster_mask]
+        cluster_schools = df[cluster_mask]['School'].values
+        
+        # Scatter plot
+        ax.scatter(cluster_points[:, 0], cluster_points[:, 1], 
+                  c=colors[cluster_id], label=f'Cluster {cluster_id}', 
+                  s=100, alpha=0.7, edgecolors='black', linewidth=1)
+        
+        # Add school labels
+        for i, school in enumerate(cluster_schools):
+            ax.annotate(school,
+                       (cluster_points[i, 0], cluster_points[i, 1]),
+                       fontsize=8,
+                       alpha=0.8,
+                       ha='center',
+                       xytext=(0, 5),
+                       textcoords='offset points')
+    
+    ax.set_xlabel('Principal Component 1', fontsize=12, fontweight='bold')
+    ax.set_ylabel('Principal Component 2', fontsize=12, fontweight='bold')
+    ax.set_title('K-Means Clustering (k=5) - PCA Visualization', fontsize=14, fontweight='bold')
+    ax.legend(loc='best')
+    ax.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
     st.pyplot(fig)
     
     st.markdown("""
