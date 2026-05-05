@@ -216,11 +216,10 @@ if page == "Home":
     from sklearn.decomposition import PCA
 
     # Load your data
-    X = df[numeric_cols].values
-
-    # PCA
+    X = df[...].values
+    X_scaled_pca = scaler.fit_transform(X)  # Standardize for PCA too
     pca = PCA(n_components=2)
-    X_pca = pca.fit_transform(X)
+    X_pca = pca.fit_transform(X_scaled_pca)
 
     # Plot
     fig, ax = plt.subplots(figsize=(10, 6))
