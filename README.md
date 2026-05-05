@@ -2,7 +2,7 @@
 
 An interactive Streamlit dashboard that classifies Power 4 college athletics fanbases into five distinct genotypes based on attendance patterns, social media engagement, financial support, and demographic characteristics.
 
-**Project Partner:** Rallyoop, Inc. (Stealth-Mode Startup)  
+**Project Partner:** Rallyoop, Inc.  
 **Academic Institution:** Virginia Tech CMDA Capstone 2026  
 **Team:** Fanalytics
 
@@ -144,20 +144,13 @@ All metrics derived from publicly available sources:
 
 ## 🎓 Use Cases
 
-### For Athletic Departments
+### For Athletic Departments:
 - Understand your fanbase DNA relative to peer institutions
 - Benchmark engagement metrics against similar genotypes
 - Identify growth opportunities based on fanbase transitions
 
-### For Rallyoop
-- Assisting Rallyoop in partnering with schools using these public insights to gain more advanced private institutional data
-- Customize go-to-market strategies by genotype
-- Prioritize partnership opportunities based on fanbase characteristics
-
-### For Researchers
-- Explore patterns in college sports fan behavior
-- Analyze demographic and geographic trends in alumni engagement
-- Study the relationship between performance and fan loyalty across different contexts
+### For Rallyoop:
+A credibility builder and conversation starter. By demonstrating sophisticated analysis using only publicly available data, Rallyoop earns trust with athletic departments, opening the door to deeper partnerships where schools share proprietary fan data (ticketing systems, CRM databases, donation records).
 
 ---
 
@@ -173,7 +166,7 @@ All metrics derived from publicly available sources:
 
 ## 📝 Project Background
 
-This dashboard was developed as part of a capstone project for **Rallyoop, Inc.**, a stealth-mode startup revolutionizing fan monetization in college athletics. The project aimed to create a scalable fanbase genotyping model using publicly available proxy metrics, enabling data-driven engagement strategies without requiring individual fan-level data.
+This dashboard was developed as part of a capstone project for **Rallyoop, Inc.**, a startup revolutionizing fan monetization in college athletics. The project aimed to create a scalable fanbase genotyping model using publicly available proxy metrics, enabling data-driven engagement strategies without requiring individual fan-level data.
 
 **Team Fanalytics** built this system to provide athletic departments and sports technology companies with actionable insights into fanbase composition and behavior patterns.
 
