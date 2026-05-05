@@ -208,11 +208,29 @@ if page == "Home":
     """)
     
     # Display clustering visualization
-    try:
-        st.image("fanbase_cluster.png", use_column_width=True)
-        st.caption("Left: PCA visualization showing 5 distinct genotypes | Right: Silhouette analysis confirming k=5 optimal cluster separation")
-    except:
-        st.info("📊 Clustering visualizations will appear here after you upload clustering_visualization.png to GitHub")
+    import matplotlib.pyplot as plt
+    from sklearn.decomposition import PCA
+
+    # Load your data
+    df = pd.read_csv('power4_attributes_fin.csv')
+    X = df[['5_Year_Pct_Change', 'Instagram_Followers_FB (Thousands)', 
+            'Instagram_Followers_BB (Thousands)', 'Donation_Revenue (Millions)',
+            'Win_Pct_Since_2003', 'Graduate_Earnings(Thousands)',
+            'Attendence_Pct_MBB', 'Attendance_Pct_FB']].values
+
+    # PCA
+    pca = PCA(n_components=2)
+    X_pca = pca.fit_transform(X)
+
+    # Plot
+    fig, ax = plt.subplots(figsize=(10, 6))
+    scatter = ax.scatter(X_pca[:, 0], X_pca[:, 1], c=df['Cluster'], cmap='viridis', s=100)
+    ax.set_xlabel('Principal Component 1')
+    ax.set_ylabel('Principal Component 2')
+    ax.set_title('K-Means Clustering (k=5) - PCA Visualization')
+    plt.colorbar(scatter, label='Cluster')
+
+    st.pyplot(fig)
     
     st.markdown("""
     **Why k=5?** Silhouette analysis revealed that 5 clusters maximize separation between groups 
