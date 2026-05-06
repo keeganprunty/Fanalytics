@@ -472,35 +472,6 @@ elif page == "User Guide":
     st.markdown("## 💡 Best Practices")
     
     col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("""
-        ### Recommended Workflow
-        
-        **For general exploration:**
-        1. Start at **Home** to see all genotypes
-        2. Explore **Genotype Profiles** to understand archetypes
-        3. Dive into **School Detail** for specific schools
-        
-        **For partnership decisions:**
-        1. Identify candidates in **Home** or **Genotype Profiles**
-        2. Use **Compare Schools** for side-by-side evaluation
-        3. Check **School Detail** for geographic market fit
-        4. Use **Classify New School** for schools not in dataset
-        """)
-    
-    with col2:
-        st.markdown("""
-        ### Tips for Effective Use
-        
-        ✅ **Save Classification results** - Screenshot distance scores for later reference
-        
-        ✅ **Use geomaps for market fit** - Geographic patterns reveal whether fanbases match your product's regional needs
-        
-        ✅ **Compare within genotypes** - Schools in the same genotype may still have important differences
-        
-        ✅ **Consider trends** - Look at 5-year attendance change to identify improving vs. declining fanbases
-        """)
 elif page == "Genotype Profiles":
     st.markdown('<div class="main-header">Genotype Profiles</div>', unsafe_allow_html=True)
     st.markdown("---")
