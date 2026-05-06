@@ -161,7 +161,7 @@ else:
 
 page = st.sidebar.radio(
     "Select Page",
-    ["Home", "Genotype Profiles", "School Detail", "Compare Schools", "Classify New School"],
+    ["Home", "User Guide", "Genotype Profiles", "School Detail", "Compare Schools", "Classify New School"],
     index=page_index
 )
 
@@ -322,6 +322,268 @@ if page == "Home":
                 with col2:
                     st.markdown("*Click to see full genotype profile and schools*")
                 break
+elif page == "User Guide":
+    st.markdown('<div class="main-header">User Guide</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-header">How to Navigate and Use This Dashboard</div>', unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    st.markdown("""
+    ## 📖 Dashboard Overview
+    
+    This dashboard helps you explore college athletics fanbase types and evaluate prospective partnership schools. 
+    Use the **sidebar navigation** to access six key pages, each designed for specific use cases.
+    """)
+    
+    st.markdown("---")
+    
+    # Feature descriptions in expandable sections
+    with st.expander("🏠 HOME - Quick Overview & School Search", expanded=True):
+        st.markdown("""
+        **What's on this page:**
+        - Overview cards for all five genotypes
+        - Clustering methodology explanation (PCA + silhouette analysis)
+        - Quick school lookup tool
+        
+        **When to use:**
+        - First-time visitors getting oriented
+        - Quick genotype identification for a specific school
+        - Understanding the clustering methodology
+        
+        **How to use:**
+        1. Scroll through genotype cards to see all five types
+        2. Click "View →" buttons to jump directly to detailed profiles
+        3. Use the school search dropdown at the bottom
+        4. Click "View Details" after searching to see that school's genotype profile
+        """)
+    
+    with st.expander("📊 GENOTYPE PROFILES - Understanding Fanbase Archetypes"):
+        st.markdown("""
+        **What's on this page:**
+        - Detailed behavioral descriptions for each genotype
+        - Key demographic and engagement metrics
+        - Geographic patterns and alumni composition
+        - Complete school lists by genotype
+        
+        **When to use:**
+        - Preparing for meetings with athletic directors
+        - Understanding what defines each fanbase type
+        - Identifying which schools share similar characteristics
+        - Learning about common challenges for each genotype
+        
+        **How to use:**
+        1. Select a genotype from the dropdown menu
+        2. Read the "Fanbase Character" section to understand who these fans are
+        3. Review the metrics (attendance, donations, social media, earnings)
+        4. Note the key characteristics and geographic patterns
+        5. Check the complete school list at the bottom
+        
+        **Example use case:** *"I'm meeting with Iowa State tomorrow. What genotype are they? What challenges do similar schools face?"*
+        """)
+    
+    with st.expander("🎓 SCHOOL DETAIL - Deep-Dive Individual Analysis"):
+        st.markdown("""
+        **What's on this page:**
+        - All 8 clustering metrics for individual schools
+        - Interactive alumni geographic distribution maps
+        - Genotype assignment for each school
+        
+        **When to use:**
+        - Evaluating a specific partnership candidate
+        - Understanding where a school's alumni actually live
+        - Comparing a school's metrics to its genotype averages
+        - Assessing geographic market fit
+        
+        **How to use:**
+        1. Select any school from the dropdown
+        2. Review the 8 clustering metrics in the two-column display
+        3. Explore the interactive alumni map:
+           - **Darker circles** = higher alumni concentration
+           - Use the map's own dropdown to switch between schools
+           - Zoom and pan to examine specific regions
+        4. Note whether the school shows national scatter or regional concentration
+        
+        **Example use case:** *"Where do Virginia Tech alumni actually live? Are they concentrated in Virginia or scattered nationally?"*
+        """)
+    
+    with st.expander("⚖️ COMPARE SCHOOLS - Side-by-Side Evaluation"):
+        st.markdown("""
+        **What's on this page:**
+        - Side-by-side comparison of 2-3 schools
+        - Comparison table with genotypes and key metrics
+        - Individual bar charts for each metric
+        
+        **When to use:**
+        - Choosing between multiple partnership candidates
+        - Identifying key differences between similar schools
+        - Understanding relative strengths and weaknesses
+        
+        **How to use:**
+        1. Select 2-3 schools from the dropdowns
+        2. Review the overview comparison table showing genotypes
+        3. Scroll through individual metric bar charts
+        4. Identify which school has stronger:
+           - Attendance patterns
+           - Social media reach
+           - Donation capacity
+           - Graduate earnings
+           - Recent growth trends
+        
+        **Example use case:** *"We're deciding between Iowa State and Kansas State. How do their fanbases compare?"*
+        """)
+    
+    with st.expander("🔍 CLASSIFY NEW SCHOOL - Predict Genotype for Any School"):
+        st.markdown("""
+        **What's on this page:**
+        - Input form for 8 metrics
+        - Nearest-centroid classification algorithm
+        - Distance calculations to all five genotypes
+        - Expected fanbase characteristics
+        
+        **When to use:**
+        - Evaluating schools not in the original 52-school dataset
+        - Assessing private schools (Miami, Stanford, USC, etc.)
+        - Hypothetical "what-if" scenarios (e.g., if a school's attendance improves)
+        
+        **How to use:**
+        1. Enter the school name
+        2. Input all 8 required metrics:
+           - **5-Year Attendance % Change** (e.g., +5.0 or -10.0)
+           - **FB Instagram Followers** (in thousands, e.g., 350)
+           - **BB Instagram Followers** (in thousands, e.g., 120)
+           - **Donation Revenue** (in millions, e.g., 42.5)
+           - **Win % Since 2003** (e.g., 58.5)
+           - **Graduate Earnings** (in thousands, e.g., 72)
+           - **Men's Basketball Attendance %** (e.g., 75.0)
+           - **Football Stadium Capacity %** (22-25 average, e.g., 92.0)
+        3. Click "Classify School"
+        4. Review predicted genotype and distance scores
+        
+        **Understanding distance scores:**
+        - **Lower distance = stronger match** to that genotype
+        - Schools with similar distances to multiple genotypes exhibit mixed characteristics
+        - Distance > 50 suggests the school doesn't fit existing genotypes well
+        
+        **Example use case:** *"We're considering Stanford (private school, not in dataset). Based on their metrics, which genotype do they resemble?"*
+        """)
+    
+    st.markdown("---")
+    
+    st.markdown("## 💡 Best Practices")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        ### Recommended Workflow
+        
+        **For general exploration:**
+        1. Start at **Home** to see all genotypes
+        2. Explore **Genotype Profiles** to understand archetypes
+        3. Dive into **School Detail** for specific schools
+        
+        **For partnership decisions:**
+        1. Identify candidates in **Home** or **Genotype Profiles**
+        2. Use **Compare Schools** for side-by-side evaluation
+        3. Check **School Detail** for geographic market fit
+        4. Use **Classify New School** for schools not in dataset
+        """)
+    
+    with col2:
+        st.markdown("""
+        ### Tips for Effective Use
+        
+        ✅ **Save Classification results** - Screenshot distance scores for later reference
+        
+        ✅ **Use geomaps for market fit** - Geographic patterns reveal whether fanbases match your product's regional needs
+        
+        ✅ **Compare within genotypes** - Schools in the same genotype may still have important differences
+        
+        ✅ **Consider trends** - Look at 5-year attendance change to identify improving vs. declining fanbases
+        """)
+    
+    st.markdown("---")
+    
+    st.markdown("## ❓ Frequently Asked Questions")
+    
+    with st.expander("Where does the data come from?"):
+        st.markdown("""
+        All metrics use publicly available data sources:
+        - **Attendance data:** NCAA official reports
+        - **Donation revenue:** USA Today NCAA Finances Database
+        - **Graduate earnings:** U.S. Department of Education College Scorecard
+        - **Social media followers:** Verified Instagram accounts (as of 2025)
+        - **Win percentage & stadium capacity:** Winsipedia
+        
+        **Time period:** All metrics represent 2022-2025 averages to smooth year-to-year volatility.
+        """)
+    
+    with st.expander("Why are some schools missing?"):
+        st.markdown("""
+        We excluded five schools due to missing donation revenue data:
+        - Miami
+        - Pittsburgh
+        - Stanford
+        - Syracuse
+        - USC
+        
+        These private institutions do not publicly report athletic department finances. However, you can use the **Classify New School** tool to estimate their genotype if you can obtain their metrics from other sources.
+        """)
+    
+    with st.expander("How accurate is the classification tool?"):
+        st.markdown("""
+        The nearest-centroid classifier achieves **100% accuracy** when applied to the 52 schools in the training dataset, meaning it perfectly reproduces the k-means cluster assignments.
+        
+        For new schools not in the dataset, accuracy depends on:
+        - How similar the school is to existing genotypes
+        - Data quality and recency
+        - Whether the school represents a genuinely new fanbase type not captured by our five genotypes
+        
+        **Interpreting confidence:**
+        - Distance < 20: Strong match
+        - Distance 20-40: Moderate match
+        - Distance > 40: Weak match or mixed characteristics
+        """)
+    
+    with st.expander("Can schools transition between genotypes?"):
+        st.markdown("""
+        Yes! Fanbases evolve as programs improve or decline. Examples:
+        
+        - **Illinois** likely transitioned from Disengaged toward Selective Affluent as their football program improved (2019-2024)
+        - **Colorado** may be transitioning with recent coaching changes and attendance surges
+        - **Nebraska** has maintained Established Traditionalist status despite declining performance, showing loyalty persists
+        
+        The model reflects a 2022-2025 snapshot. Periodic re-clustering is recommended to capture evolving fanbases.
+        """)
+    
+    with st.expander("How should I use this for partnership decisions?"):
+        st.markdown("""
+        This dashboard provides **systematic fanbase evaluation**, not definitive partnership recommendations. Use it to:
+        
+        ✅ **Identify schools with characteristics matching your product** (e.g., affluent alumni, social media reach, donation capacity)
+        
+        ✅ **Understand what to expect** from partnerships with different genotypes
+        
+        ✅ **Tailor your pitch** by referencing similar schools and genotype-specific challenges
+        
+        ✅ **Prioritize outreach** based on data-driven fanbase profiles rather than intuition alone
+        
+        ❌ Don't use genotypes as the ONLY factor - program leadership, existing partnerships, and strategic fit matter too
+        """)
+    
+    st.markdown("---")
+    
+    st.markdown("## 📞 Support & Feedback")
+    
+    st.markdown("""
+    **Questions or issues?** Contact the development team or visit our GitHub repository:
+    
+    🔗 **GitHub:** [Insert your repository URL]
+    
+    📧 **Contact:** [Insert your email or contact info]
+    
+    💬 **Feedback welcome!** We're continuously improving this tool based on user input.
+    """)
 elif page == "Genotype Profiles":
     st.markdown('<div class="main-header">Genotype Profiles</div>', unsafe_allow_html=True)
     st.markdown("---")
